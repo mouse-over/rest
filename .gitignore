@@ -1,0 +1,7 @@
+/libs/
+/tests/*/output/
+/tests/coverage.dat
+composer.lock
+*.iml
+*.ipr
+*.iws

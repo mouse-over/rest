@@ -1,1 +1,3 @@
-# rest - nette rest extension proof of concept
+# mouseover/rest - nette rest extension 
+
+proof of concept
