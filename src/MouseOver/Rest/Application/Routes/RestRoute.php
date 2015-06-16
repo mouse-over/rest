@@ -207,6 +207,11 @@ class RestRoute extends Route implements IRestRoute
                     ? $this->methodDictionary[$appRequest->getMethod()]
                     : null;
 
+                if (!isset($this->actionDictionary[$methodFlag]))
+                {
+                    return null;
+                }
+
                 $action = $this->actionDictionary[$methodFlag];
 
                 if (is_string($action) && Strings::startsWith($params['action'], $action)) {
