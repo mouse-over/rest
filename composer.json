@@ -1,5 +1,6 @@
 {
     "name": "mouseover/rest",
+    "type": "library",
     "description": "MouseOver Nette rest extension",
     "authors": [
         {
