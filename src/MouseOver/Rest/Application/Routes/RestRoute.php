@@ -198,7 +198,9 @@ class RestRoute extends Route implements IRestRoute
      */
     public function constructUrl(Application\Request $appRequest, Http\Url $refUrl)
     {
-        if (count($this->actionDictionary) > 0) {
+        if ($appRequest->getMethod() !== Application\Request::FORWARD
+            && count($this->actionDictionary) > 0
+        ) {
             $appRequest = clone $appRequest;
             $params = $appRequest->getParameters();
 

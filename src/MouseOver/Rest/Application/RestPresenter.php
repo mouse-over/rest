@@ -163,11 +163,22 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
                 $this->execute($this->getInput(), $this->getResource());
             }
 
+            $this->success();
         } catch (\Exception $exception) {
             $this->resource = $this->createErrorResource($exception);
         }
 
         return $this->createResponse($this->getParameter('format', null));
+    }
+
+    /**
+     * Successfuly run
+     *
+     * @return void
+     */
+    protected function success()
+    {
+         $this->getResource()->status = 'success';
     }
 
     /**
