@@ -69,6 +69,19 @@ class BadRequestException extends Nette\Application\BadRequestException
     /****************** Simple factories ******************/
 
     /**
+     * Is thrown when request is not understood
+     *
+     * @param string     $message
+     * @param \Exception $previous
+     *
+     * @return BadRequestException
+     */
+    public static function badRequest($message = '', \Exception $previous = NULL)
+    {
+        return new self($message, 400, $previous);
+    }
+
+    /**
      * Is thrown when trying to reach secured resource without authentication
      *
      * @param string     $message

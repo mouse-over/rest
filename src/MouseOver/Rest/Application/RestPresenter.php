@@ -79,11 +79,52 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
         return $this->httpResponse;
     }
 
+    /**
+     * Return's resource factory
+     *
+     * @return Rest\Resource\IResourceFactory
+     */
+    public function getResourceFactory()
+    {
+        return $this->resourceFactory;
+    }
+
+    /**
+     * Return's response factory
+     *
+     * @return IResponseFactory
+     */
+    public function getResponseFactory()
+    {
+        return $this->responseFactory;
+    }
+
+    /**
+     * Return's input factory
+     *
+     * @return IInputFactory
+     */
+    public function getInputFactory()
+    {
+        return $this->inputFactory;
+    }
+
+
+    /**
+     * Return's true if is ajax request
+     *
+     * @return bool
+     */
     public function isAjax()
     {
         return $this->httpRequest->isAjax();
     }
 
+    /**
+     * Return's default data format
+     *
+     * @return null|string format name
+     */
     public function getFormat()
     {
         return null;
@@ -272,6 +313,7 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
 
     /**
      * Returns component parameters.
+     *
      * @return array
      */
     public function getParameters()
@@ -279,6 +321,11 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
         return $this->params;
     }
 
+    /**
+     * Return's input
+     *
+     * @return \MouseOver\Rest\Http\IInput
+     */
     public function getInput()
     {
         if (!$this->input) {
@@ -320,15 +367,21 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
         }
     }
 
+    /**
+     * Return's action method name
+     *
+     * @return string
+     */
     protected function formatActionMethodName() {
         return 'action'.ucfirst($this->getParameter('action', 'default'));
     }
+
     /**
      * Create error response from exception
      *
      * @param \Exception $exception Exception to create resource from
      *
-     * @return \Drahak\Restful\IResource
+     * @return \MouseOver\Rest\Resource\IResource
      */
     protected function createErrorResource(\Exception $exception)
     {
