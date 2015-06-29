@@ -2,6 +2,7 @@
 
 namespace MouseOver\Rest\Crud;
 
+use MouseOver\Rest\InvalidStateException;
 use Nette;
 use Nette\Object;
 use Nette\Utils\Arrays;
@@ -34,6 +35,21 @@ class CrudAdapterFactory extends Object
 
     /** @var  string */
     private $default;
+
+    /**
+     * Sets mapping as pairs [module => mask]
+     * @return self
+     */
+    public function setMapping(array $mapping)
+    {
+        foreach ($mapping as $module => $mask) {
+            if (!preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m)) {
+                throw new InvalidStateException("Invalid mapping mask '$mask'.");
+            }
+            $this->mapping[$module] = array($m[1], $m[2] ?: '*Module\\', $m[3]);
+        }
+        return $this;
+    }
 
     /**
      * AuthenticatorFactory constructor.
