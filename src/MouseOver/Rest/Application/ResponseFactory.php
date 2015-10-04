@@ -164,6 +164,8 @@ class ResponseFactory extends Object implements IResponseFactory
 
 		if (!$resource->getData()) {
 			$this->response->setCode(204); // No content
+		} else if (isset($resource->code)) {
+			$this->response->setCode($resource->code);
 		}
 
 		$responseClass = $this->responses[$contentType];

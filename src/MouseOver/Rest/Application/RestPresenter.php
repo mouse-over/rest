@@ -385,9 +385,14 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
      */
     protected function createErrorResource(\Exception $exception)
     {
+        $code = $exception->getCode() ? $exception->getCode() : 500;
+        if ($code < 100 || $code > 599) {
+            $code = 400;
+        }
+
         $resource = $this->resourceFactory->create(
             [
-                'code' => $exception->getCode(),
+                'code' => $code,
                 'status' => 'error',
                 'message' => $exception->getMessage()
             ]
