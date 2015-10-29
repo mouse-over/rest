@@ -2,7 +2,6 @@
 namespace MouseOver\Rest\Application;
 
 
-use Drahak\Restful\Application\Responses\NullResponse;
 use MouseOver\Rest\Http\IInputFactory;
 use Nette,
     Nette\Application,
