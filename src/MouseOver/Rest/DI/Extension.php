@@ -17,7 +17,8 @@ class Extension extends CompilerExtension
 
     private $defaults = [
         'client' => true,
-        'server' => true
+        'server' => true,
+        'validations' => true
     ];
 
     /**
@@ -32,6 +33,10 @@ class Extension extends CompilerExtension
             $this->loadMapping($container, $config);
             if ($config['server']) {
                 $this->loadRestful($container, $config);
+            }
+
+            if ($config['validations']) {
+                $this->loadValidation($container, $config);
             }
         }
     }
@@ -88,6 +93,24 @@ class Extension extends CompilerExtension
 
         $container->getDefinition('httpResponse')
             ->setFactory($this->prefix('@httpResponseFactory') . '::createHttpResponse');
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param $config
+     */
+    private function loadValidation(ContainerBuilder $container, $config)
+    {
+        $container->addDefinition($this->prefix('validator'))
+            ->setClass('MouseOver\Rest\Validation\Validator');
+
+        $container->addDefinition($this->prefix('validationScopeFactory'))
+            ->setClass('MouseOver\Rest\Validation\ValidationScopeFactory');
+
+        $container->addDefinition($this->prefix('validationScope'))
+            ->setClass('MouseOver\Rest\Validation\ValidationScope')
+            ->setFactory($this->prefix('@validationScopeFactory') . '::create');
+
     }
 
 }
