@@ -197,10 +197,14 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
                 );
             }
 
-            if ($this->getParameter('closure', false)) {
-                $this->processCallback($this->getParameter('closure'));
+            if ($request->getMethod() === 'OPTIONS') {
+                 //- nothing to do
             } else {
-                $this->execute($this->getInput(), $this->getResource());
+                if ($this->getParameter('closure', false)) {
+                    $this->processCallback($this->getParameter('closure'));
+                } else {
+                    $this->execute($this->getInput(), $this->getResource());
+                }
             }
 
             $this->success();

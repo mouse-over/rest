@@ -18,7 +18,9 @@ class Extension extends CompilerExtension
     private $defaults = [
         'client' => true,
         'server' => true,
-        'validations' => true
+        'validations' => true,
+        'httpResponseHeaders' => [],
+        'httpAllowedOrigin' => []
     ];
 
     /**
@@ -89,7 +91,9 @@ class Extension extends CompilerExtension
 
         // Http
         $container->addDefinition($this->prefix('httpResponseFactory'))
-            ->setClass('MouseOver\Rest\Http\ResponseFactory');
+            ->setClass('MouseOver\Rest\Http\ResponseFactory')
+            ->addSetup('$service->setHeaders(?)', array($config['httpResponseHeaders']))
+            ->addSetup('$service->setAllowedOrigin(?)', array($config['httpAllowedOrigin']));
 
         $container->getDefinition('httpResponse')
             ->setFactory($this->prefix('@httpResponseFactory') . '::createHttpResponse');

@@ -32,6 +32,12 @@ class ResponseFactory extends Object
     /** @var IResponse */
     private $response;
 
+    /** @var  array */
+    private $headers = [];
+
+    /** @var array  */
+    private $allowedOrigin = [];
+
     /**
      * @param IRequest $request
      */
@@ -39,6 +45,27 @@ class ResponseFactory extends Object
     {
         $this->request = $request;
     }
+
+    public function addHeader($name, $value) {
+        $this->headers[$name] = $value;
+    }
+
+    /**
+     * @param array $headers
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
+    }
+
+    /**
+     * @param array $allowedOrigin
+     */
+    public function setAllowedOrigin($allowedOrigin)
+    {
+        $this->allowedOrigin = $allowedOrigin;
+    }
+
 
     /**
      * Set original wrapper response since nette does not support custom response codes
@@ -64,6 +91,15 @@ class ResponseFactory extends Object
     {
         $response = $this->response ? $this->response : new Response();
         $response->setCode($this->getCode($code));
+        foreach ($this->headers as $k => $v) {
+            $response->addHeader($k, $v);
+        }
+        if ($this->allowedOrigin) {
+            $origin = $this->request->getHeader('origin');
+            if ($origin && in_array($origin, $this->allowedOrigin) !== false) {
+                 $response->addHeader('Access-Control-Allow-Origin', $origin);
+            }
+        }
         return $response;
     }
 

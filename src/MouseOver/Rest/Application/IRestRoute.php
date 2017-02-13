@@ -13,6 +13,7 @@ use Nette\Http;
 interface IRestRoute extends IRouter
 {
     /** Resource methods */
+    const OPTIONS = 0;
     const GET = 4;
     const POST = 8;
     const PUT = 16;
