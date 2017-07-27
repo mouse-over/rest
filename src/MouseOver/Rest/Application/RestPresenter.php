@@ -366,7 +366,7 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
         $parameters['input'] = $input;
         $parameters['output'] = $output;
         if ($this->tryCall($method, $parameters) === false) {
-            throw Rest\BadRequestException::notFound('Action not found!');
+            throw Rest\BadRequestException::notFound('Action "'.$method.'" not found!');
         }
     }
 
