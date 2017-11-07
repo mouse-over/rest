@@ -52,10 +52,11 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
     private $input;
 
     /** @var array */
-    private $formats = array(
+    protected $formats = array(
         'json' => Rest\Resource\IResource::JSON,
         'xml' => Rest\Resource\IResource::XML,
-        'none' => Rest\Resource\IResource::NULL
+        'none' => Rest\Resource\IResource::NULL,
+        'ics' => 'text/calendar'
     );
 
     /**
@@ -118,17 +119,6 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
     {
         return $this->httpRequest->isAjax();
     }
-
-    /**
-     * Return's default data format
-     *
-     * @return null|string format name
-     */
-    public function getFormat()
-    {
-        return null;
-    }
-
 
     /**
      * Inject primary dependencies
@@ -417,7 +407,7 @@ class RestPresenter extends Nette\Object implements Application\IPresenter
      */
     protected function createResponse($format = null)
     {
-        $contentType = $format ? $this->formats[$format] : $this->getFormat();
+        $contentType = $this->responseFactory->getFormat($format);
         return $this->responseFactory->create($this->getResource(), $contentType);
     }
 

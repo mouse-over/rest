@@ -33,7 +33,14 @@ class ResponseFactory extends Object implements IResponseFactory
 	/** @var string JSONP request key */
 	private $jsonp;
 
-	/** @var string pretty print key */
+	private $formats = array(
+        'json' => IResource::JSON,
+        'xml' => IResource::XML,
+        'none' => IResource::NULL,
+    );
+
+
+    /** @var string pretty print key */
 	private $prettyPrintKey = 'prettyPrint';
         
         /** @var boolean */
@@ -208,7 +215,7 @@ class ResponseFactory extends Object implements IResponseFactory
 		return $this->prettyPrint;
 	}
 
-        /**
+    /**
 	 * Get preferred request content type
 	 * @param  string $contentType may be separed with comma
 	 * @return string
@@ -233,4 +240,13 @@ class ResponseFactory extends Object implements IResponseFactory
 		throw new InvalidStateException('Unknown Accept header: ' . $contentType);
 	}
 
+	public function registerFormat($extension, $format)
+    {
+         $this->formats[$extension] = $format;
+    }
+
+    public function getFormat($extension, $default = null)
+    {
+        return isset($this->formats[$extension]) ? $this->formats[$extension] : $default;
+    }
 }
