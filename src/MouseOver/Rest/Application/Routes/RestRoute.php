@@ -143,7 +143,7 @@ class RestRoute extends Route implements IRestRoute
         $isActionDefined = $this->actionDictionary && !in_array($method, $common) ?
             isset($this->actionDictionary[$method]) :
             true;
-        return ($this->flags & $method) == $method && $isActionDefined;
+        return ($this->getFlags() & $method) == $method && $isActionDefined;
     }
 
     /**
