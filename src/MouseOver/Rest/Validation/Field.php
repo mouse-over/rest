@@ -1,7 +1,6 @@
 <?php
 namespace MouseOver\Rest\Validation;
 
-use Nette\Object;
 use Nette\Utils\Validators;
 use MouseOver\Rest\Validation\ValidationException;
 
@@ -14,8 +13,10 @@ use MouseOver\Rest\Validation\ValidationException;
  * @property-read Rule[]     $rules
  * @property-read IValidator $validator
  */
-class Field extends Object implements IField
+class Field implements IField
 {
+
+    use \Nette\SmartObject;
 
     /** @var array Default field error messages for validator */
     public static $defaultMessages = [

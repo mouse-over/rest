@@ -11,15 +11,15 @@ use Nette\Utils\Strings;
 use Nette\Http\IResponse;
 use Nette\Http\IRequest;
 use Nette\Http\Url;
-use Nette\Object;
 
 /**
  * REST ResponseFactory
  * @package Drahak\Restful
  * @author Drahomír Hanák
  */
-class ResponseFactory extends Object implements IResponseFactory
+class ResponseFactory implements IResponseFactory
 {
+    use \Nette\SmartObject;
 
 	/** @var IResponse */
 	private $response;

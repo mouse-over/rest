@@ -2,7 +2,6 @@
 namespace MouseOver\Rest\Application\Responses;
 
 use Nette\Application\IResponse;
-use Nette\Object;
 use Nette\Http;
 
 /**
@@ -11,8 +10,10 @@ use Nette\Http;
  * @package MouseOver\Rest\Application\Responses
  * @author  Drahomír Hanák
  */
-class NullResponse extends Object implements IResponse
+class NullResponse implements IResponse
 {
+
+    use \Nette\SmartObject;
 
     /**
      * Do nothing

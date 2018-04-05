@@ -1,7 +1,6 @@
 <?php
 namespace MouseOver\Rest\Mapping;
 
-use Nette\Object;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 
@@ -11,8 +10,9 @@ use Nette\Utils\JsonException;
  * @package MouseOver\Rest\Mapping
  * @author  Drahomír Hanák
  */
-class JsonMapper extends Object implements IMapper
+class JsonMapper implements IMapper
 {
+    use \Nette\SmartObject;
 
     /**
      * Convert array or Traversable input to string output response

@@ -4,7 +4,6 @@ namespace MouseOver\Rest\Http;
 use Nette\Http\IResponse;
 use Nette\Http\IRequest;
 use Nette\Http\Response;
-use Nette\Object;
 
 
 /**
@@ -13,8 +12,9 @@ use Nette\Object;
  * @package Drahak\Restful\Http
  * @author  Drahomír Hanák
  */
-class ResponseFactory extends Object
+class ResponseFactory
 {
+    use \Nette\SmartObject;
 
     /** @var array Default response code for each request method */
     protected $defaultCodes = array(

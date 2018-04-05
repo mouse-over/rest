@@ -1,15 +1,15 @@
 <?php
 namespace MouseOver\Rest\Validation;
 
-use Nette\Object;
 
 /**
  * ValidationScopeFactory
  * @package MouseOver\Rest\Validation
  * @author  Drahomír Hanák
  */
-class ValidationScopeFactory extends Object implements IValidationScopeFactory
+class ValidationScopeFactory implements IValidationScopeFactory
 {
+    use \Nette\SmartObject;
 
     /** @var IValidator */
     private $validator;

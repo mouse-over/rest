@@ -3,7 +3,6 @@ namespace MouseOver\Rest\Mapping;
 
 use DOMDocument;
 use Traversable;
-use Nette\Object;
 use SimpleXMLElement;
 use MouseOver\Rest\InvalidArgumentException;
 
@@ -16,8 +15,9 @@ use MouseOver\Rest\InvalidArgumentException;
  * @property string|NULL $rootElement
  * @property string      $itemElement
  */
-class XmlMapper extends Object implements IMapper
+class XmlMapper implements IMapper
 {
+    use \Nette\SmartObject;
 
     /** @internal */
     const ITEM_ELEMENT = 'item';

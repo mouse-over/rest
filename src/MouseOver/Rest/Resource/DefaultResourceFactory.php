@@ -1,7 +1,6 @@
 <?php
 namespace MouseOver\Rest\Resource;
 
-use Nette\Object;
 
 /**
  * DefaultResourceFactory
@@ -9,8 +8,10 @@ use Nette\Object;
  * @package Drahak\Restful
  * @author  Drahomír Hanák
  */
-class DefaultResourceFactory extends Object implements IResourceFactory
+class DefaultResourceFactory implements IResourceFactory
 {
+
+    use \Nette\SmartObject;
 
     /**
      * Create new API resource

@@ -15,8 +15,10 @@ use MouseOver,
  *
  * @package MouseOver\Rest
  */
-class RestPresenter extends Nette\Object implements Application\IPresenter
+class RestPresenter implements Application\IPresenter
 {
+
+    use \Nette\SmartObject;
 
     /** @var array */
     protected $params = array();

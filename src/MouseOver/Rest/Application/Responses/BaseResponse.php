@@ -6,7 +6,6 @@ use MouseOver\Rest\InvalidArgumentException;
 use MouseOver\Rest\Mapping\IMapper;
 use Nette\Application\IResponse;
 use Nette\Http\IRequest;
-use Nette\Object;
 
 /**
  * BaseResponse
@@ -16,8 +15,10 @@ use Nette\Object;
  *
  * @property-read string   $contentType
  */
-abstract class BaseResponse extends Object implements IResponse
+abstract class BaseResponse implements IResponse
 {
+
+    use \Nette\SmartObject;
 
     /** @var array|\stdClass|\Traversable */
     protected $data;

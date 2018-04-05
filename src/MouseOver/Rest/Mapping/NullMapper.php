@@ -1,7 +1,6 @@
 <?php
 namespace MouseOver\Rest\Mapping;
 
-use Nette\Object;
 
 /**
  * NullMapper
@@ -9,8 +8,9 @@ use Nette\Object;
  * @package MouseOver\Rest\Mapping
  * @author  Drahomír Hanák
  */
-class NullMapper extends Object implements IMapper
+class NullMapper implements IMapper
 {
+    use \Nette\SmartObject;
 
     /**
      * Convert array or Traversable input to string output response

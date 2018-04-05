@@ -2,7 +2,6 @@
 namespace MouseOver\Rest\Http;
 
 use Nette\MemberAccessException;
-use Nette\Object;
 
 
 /**
@@ -10,8 +9,10 @@ use Nette\Object;
  *
  * @package MouseOver\Restful\Http
  */
-class Input extends Object implements \IteratorAggregate, IInput
+class Input implements \IteratorAggregate, IInput
 {
+
+    use \Nette\SmartObject;
 
     /** @var array */
     private $data;

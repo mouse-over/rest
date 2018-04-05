@@ -1,7 +1,6 @@
 <?php
 namespace MouseOver\Rest\Validation;
 
-use Nette\Object;
 use Nette\Utils\Validators;
 use Nette\Utils\Strings;
 
@@ -12,8 +11,10 @@ use Nette\Utils\Strings;
  *
  * @property-read IValidator $validator
  */
-class ValidationScope extends Object implements IValidationScope
+class ValidationScope implements IValidationScope
 {
+
+    use \Nette\SmartObject;
 
     /** @var IValidator */
     private $validator;

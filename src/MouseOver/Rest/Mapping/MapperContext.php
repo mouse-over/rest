@@ -1,7 +1,6 @@
 <?php
 namespace MouseOver\Rest\Mapping;
 
-use Nette\Object;
 use Nette\Utils\Strings;
 use MouseOver\Rest\InvalidStateException;
 
@@ -11,8 +10,9 @@ use MouseOver\Rest\InvalidStateException;
  * @package MouseOver\Rest\Mapping
  * @author  Drahomír Hanák
  */
-class MapperContext extends Object
+class MapperContext
 {
+    use \Nette\SmartObject;
 
     /** @var array */
     protected $services = array();

@@ -4,7 +4,6 @@ namespace MouseOver\Rest\Crud;
 
 use MouseOver\Rest\InvalidStateException;
 use Nette;
-use Nette\Object;
 use Nette\Utils\Arrays;
 
 
@@ -13,8 +12,9 @@ use Nette\Utils\Arrays;
  *
  * @package Eset\Rest\Models
  */
-class CrudAdapterFactory extends Object
+class CrudAdapterFactory
 {
+    use \Nette\SmartObject;
 
     /** @var bool */
     public $caseSensitive = FALSE;

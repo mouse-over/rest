@@ -3,7 +3,6 @@ namespace MouseOver\Rest\Validation;
 
 use MouseOver\Rest\InvalidStateException;
 use MouseOver\Rest\InvalidArgumentException;
-use Nette\Object;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
 use MouseOver\Rest\Validation\ValidationException;
@@ -13,8 +12,10 @@ use MouseOver\Rest\Validation\ValidationException;
  * @package MouseOver\Rest\Validation
  * @author  Drahomír Hanák
  */
-class Validator extends Object implements IValidator
+class Validator implements IValidator
 {
+
+    use \Nette\SmartObject;
 
     /** @var array Command handle callbacks */
     public $handle = [
