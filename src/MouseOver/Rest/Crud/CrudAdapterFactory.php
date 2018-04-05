@@ -167,6 +167,8 @@ class CrudAdapterFactory extends Object
                         require $file;
                     }
                 );
+
+                return $class;
             }
 
             if ($default) {
