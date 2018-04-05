@@ -20,7 +20,12 @@ use Nette\MemberAccessException;
 class Resource implements ArrayAccess, Serializable, IteratorAggregate, IResource
 {
 
-    use \Nette\SmartObject;
+    use \Nette\SmartObject  {
+        __set as protected __smartSet;
+        __get as protected __smartGet;
+        __unset as protected __smartUnset;
+        __isset as protected __smartIsset;
+    }
 
     /** @var array */
     private $data = array();
@@ -132,7 +137,7 @@ class Resource implements ArrayAccess, Serializable, IteratorAggregate, IResourc
     public function &__get($name)
     {
         try {
-            return parent::__get($name);
+            return $this->__smartGet($name);
         } catch (MemberAccessException $e) {
             if (isset($this->data[$name])) {
                 return $this->data[$name];
@@ -151,7 +156,7 @@ class Resource implements ArrayAccess, Serializable, IteratorAggregate, IResourc
     public function __set($name, $value)
     {
         try {
-            parent::__set($name, $value);
+           $this->__smartSet($name, $value);
         } catch (MemberAccessException $e) {
             $this->data[$name] = $value;
         }
@@ -166,7 +171,7 @@ class Resource implements ArrayAccess, Serializable, IteratorAggregate, IResourc
      */
     public function __isset($name)
     {
-        return !parent::__isset($name) ? isset($this->data[$name]) : TRUE;
+        return !$this->__smartIsset($name) ? isset($this->data[$name]) : TRUE;
     }
 
     /**
@@ -179,7 +184,7 @@ class Resource implements ArrayAccess, Serializable, IteratorAggregate, IResourc
     public function __unset($name)
     {
         try {
-            parent::__unset($name);
+            $this->__smartUnset($name);
         } catch (MemberAccessException $e) {
             if (isset($this->data[$name])) {
                 unset($this->data[$name]);
