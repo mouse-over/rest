@@ -12,7 +12,7 @@ use Nette\Utils\MimeTypeDetector;
  * @property-read string $content
  * @property-read string $contentType
  */
-class Media
+class Media implements IResource
 {
     use \Nette\SmartObject;
 
@@ -75,4 +75,12 @@ class Media
 		return new Media(file_get_contents($filePath), $mimeType);
 	}
 
+    /**
+     * Get element value or array data
+     * @return array|\Traversable
+     */
+    public function getData()
+    {
+        return $this;
+    }
 }

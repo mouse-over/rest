@@ -3,6 +3,7 @@ namespace MouseOver\Rest\Resource;
 
 /**
  * IResource determines REST service result set
+ *
  * @package Drahak\Restful
  * @author Drahomír Hanák
  */
