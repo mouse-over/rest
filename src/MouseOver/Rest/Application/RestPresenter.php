@@ -190,6 +190,7 @@ class RestPresenter implements Application\IPresenter
             }
 
             if ($request->getMethod() === 'OPTIONS') {
+                return new Rest\Application\Responses\NullResponse();
                  //- nothing to do
             } else {
                 if ($this->getParameter('closure', false)) {
