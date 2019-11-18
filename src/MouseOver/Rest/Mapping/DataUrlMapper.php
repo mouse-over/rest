@@ -2,7 +2,6 @@
 namespace MouseOver\Rest\Mapping;
 
 use MouseOver\Rest\Resource\Media;
-use Nette\Templating\Helpers;
 use Nette\Utils\Strings;
 use MouseOver\Rest\InvalidArgumentException;
 
@@ -30,7 +29,7 @@ class DataUrlMapper implements IMapper
 				'DataUrlMapper expects object of type Media, ' . (gettype($data)) . ' given'
 			);
 		}
-		return Helpers::dataStream((string)$data, $data->getContentType());
+		return self::dataStream((string)$data, $data->getContentType());
 	}
 
 	/**
@@ -49,5 +48,19 @@ class DataUrlMapper implements IMapper
 
 		return new Media(base64_decode($matches[3]), $matches[1]);
 	}
+
+    /**
+     * The data: URI generator.
+     * @param  string plain text
+     * @param  string
+     * @return string plain text
+     */
+    public static function dataStream($data, $type = null)
+    {
+        if ($type === null) {
+            $type = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $data);
+        }
+        return 'data:' . ($type ? "$type;" : '') . 'base64,' . base64_encode($data);
+    }
 
 }

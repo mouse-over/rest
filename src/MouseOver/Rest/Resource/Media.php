@@ -1,9 +1,6 @@
 <?php
 namespace MouseOver\Rest\Resource;
 
-use Nette\Templating\Helpers;
-use Nette\Utils\MimeTypeDetector;
-
 /**
  * Media resource representation object
  * @package Drahak\Restful\Resource
@@ -70,7 +67,11 @@ class Media implements IResource
 	public static function fromFile($filePath, $mimeType = NULL)
 	{
 		if (!$mimeType) {
-			$mimeType = MimeTypeDetector::fromFile($filePath);
+            if (!is_file($file)) {
+                throw new Nette\FileNotFoundException("File '$file' not found.");
+            }
+            $type = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $file);
+            $mimeType = strpos($type, '/') ? $type : 'application/octet-stream';
 		}
 		return new Media(file_get_contents($filePath), $mimeType);
 	}
