@@ -9,7 +9,7 @@ namespace MouseOver\Rest\Resource;
  * @property-read string $content
  * @property-read string $contentType
  */
-class Media implements IResource
+class Media implements \MouseOver\Rest\Resource\IResource
 {
     use \Nette\SmartObject;
 
