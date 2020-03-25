@@ -34,6 +34,14 @@ class FileResponse extends BaseResponse
     public function send(Http\IRequest $httpRequest, Http\IResponse $httpResponse)
     {
         $httpResponse->setContentType($this->contentType);
+        $name = $this->data->getName();
+        if ($name) {
+            $httpResponse->setHeader('Content-Disposition',
+                ($this->data->isForceDownload() ? 'attachment' : 'inline')
+                . '; filename="' . $name . '"'
+                . '; filename*=utf-8\'\'' . rawurlencode($name));
+        }
+
         echo $this->data->content;
     }
 

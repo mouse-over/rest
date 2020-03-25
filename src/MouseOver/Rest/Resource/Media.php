@@ -18,16 +18,58 @@ class Media implements \MouseOver\Rest\Resource\IResource
 
 	/** @var string|NULL */
 	private $contentType;
+	
+	/** @var string */
+	private $name;
+	
+	/** @var boolean */
+	private $forceDownload;
 
 	/**
 	 * @param string $content
 	 * @param string|NULL $contentType
+     * @param string|NULL $name
+     * @param boolean $forceDownload                        
 	 */
-	public function __construct($content, $contentType = NULL)
+	public function __construct($content, $contentType = NULL, $name = NULL, $forceDownload = false)
 	{
 		$this->content = $content;
 		$this->contentType = $contentType ? $contentType : MimeTypeDetector::fromString($content);
+		$this->name = $name;
+		$this->forceDownload = $forceDownload;
 	}
+
+    /**
+     * @return bool
+     */
+    public function isForceDownload()
+    {
+        return $this->forceDownload;
+    }
+
+    /**
+     * @param bool $forceDownload
+     */
+    public function setForceDownload($forceDownload)
+    {
+        $this->forceDownload = $forceDownload;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
 	/**
 	 * Get media mime type
